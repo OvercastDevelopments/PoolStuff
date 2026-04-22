@@ -1,65 +1,110 @@
-import Image from "next/image";
+import Link from "next/link";
+
+const featuredServices = [
+  { title: "Dolphin Robot Service Centre", desc: "Authorized Maytronics Dolphin service centre — factory-trained techs and genuine parts.", icon: "🤖" },
+  { title: "Lovibond Service Centre", desc: "Calibration, repair, and certification for Lovibond water-testing instruments.", icon: "💧" },
+  { title: "Commercial Pool Fit-Outs", desc: "End-to-end fit-outs for hotels, fitness centres, and aquatic facilities.", icon: "🏗️" },
+];
+
+const featuredProducts = [
+  { name: "VarioFlo VS-10 Commercial Pump", tag: "Equipment", blurb: "High-flow variable-speed pump built for commercial circulation loads." },
+  { name: "CrystalClear C-800 Filter", tag: "Equipment", blurb: "High-capacity commercial cartridge filter for heavy bather loads." },
+  { name: "BalancePro Commercial Kit", tag: "Chemicals", blurb: "Bulk-scale water chemistry starter kit for public and semi-public pools." },
+];
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <section className="relative overflow-hidden bg-gradient-to-br from-sky-500 via-sky-600 to-cyan-600 text-white">
+        <div className="absolute inset-0 opacity-20 [background-image:radial-gradient(circle_at_30%_20%,white,transparent_40%),radial-gradient(circle_at_70%_80%,white,transparent_40%)]" />
+        <div className="relative max-w-6xl mx-auto px-6 py-24 md:py-32">
+          <p className="uppercase tracking-widest text-sky-100 text-sm font-semibold mb-4">
+            Commercial pool products · service · installation
           </p>
+          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight max-w-3xl">
+            Commercial pool expertise your facility can count on.
+          </h1>
+          <p className="mt-6 text-lg md:text-xl text-sky-50 max-w-2xl">
+            Hotels, HOAs, fitness centers, aquatic facilities, and municipalities trust PoolStuff for commercial-grade equipment, code-compliant maintenance, and fast equipment service — keeping pools open and patrons safe.
+          </p>
+          <div className="mt-10 flex flex-wrap gap-4">
+            <Link
+              href="/products"
+              className="bg-white text-sky-700 hover:bg-sky-50 px-6 py-3 rounded-full font-semibold transition"
+            >
+              View Products
+            </Link>
+            <Link
+              href="/contact"
+              className="bg-sky-800/40 hover:bg-sky-800/60 border border-white/40 text-white px-6 py-3 rounded-full font-semibold transition"
+            >
+              Request a Proposal
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <section className="max-w-6xl mx-auto px-6 py-20">
+        <div className="flex items-end justify-between mb-10">
+          <div>
+            <p className="text-sky-600 font-semibold uppercase tracking-wider text-sm">What we do</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">Featured Services</h2>
+          </div>
+          <Link href="/services" className="text-sky-600 hover:text-sky-700 font-semibold hidden sm:inline">
+            All services →
+          </Link>
         </div>
-      </main>
-    </div>
+        <div className="grid md:grid-cols-3 gap-6">
+          {featuredServices.map((s) => (
+            <div key={s.title} className="bg-white rounded-2xl border border-sky-100 p-7 hover:shadow-lg hover:-translate-y-1 transition">
+              <div className="text-4xl mb-4">{s.icon}</div>
+              <h3 className="text-xl font-bold text-slate-900">{s.title}</h3>
+              <p className="text-slate-600 mt-2">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="bg-sky-50/60 border-y border-sky-100">
+        <div className="max-w-6xl mx-auto px-6 py-20">
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="text-sky-600 font-semibold uppercase tracking-wider text-sm">Top sellers</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">Featured Products</h2>
+            </div>
+            <Link href="/products" className="text-sky-600 hover:text-sky-700 font-semibold hidden sm:inline">
+              Shop all →
+            </Link>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {featuredProducts.map((p) => (
+              <div key={p.name} className="bg-white rounded-2xl overflow-hidden border border-sky-100 hover:shadow-lg transition">
+                <div className="aspect-[4/3] bg-gradient-to-br from-sky-200 to-cyan-300" />
+                <div className="p-6">
+                  <span className="text-xs uppercase tracking-wider font-semibold text-cyan-700">{p.tag}</span>
+                  <h3 className="text-lg font-bold text-slate-900 mt-1">{p.name}</h3>
+                  <p className="text-slate-600 text-sm mt-2">{p.blurb}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="max-w-6xl mx-auto px-6 py-20 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
+          Let&apos;s keep your facility open.
+        </h2>
+        <p className="mt-4 text-slate-600 max-w-xl mx-auto">
+          Tell us about your property and we&apos;ll put together a detailed proposal — typically within two business days.
+        </p>
+        <Link
+          href="/contact"
+          className="inline-block mt-8 bg-sky-600 hover:bg-sky-700 text-white px-8 py-3 rounded-full font-semibold transition"
+        >
+          Request a Proposal
+        </Link>
+      </section>
+    </>
   );
 }
