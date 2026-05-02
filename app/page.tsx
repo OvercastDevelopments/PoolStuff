@@ -1,10 +1,5 @@
 import Link from "next/link";
-
-const featuredServices = [
-  { title: "Dolphin Robot Service Centre", desc: "Authorized Maytronics Dolphin service centre — factory-trained techs and genuine parts.", icon: "🤖" },
-  { title: "Lovibond Service Centre", desc: "Calibration, repair, and certification for Lovibond water-testing instruments.", icon: "💧" },
-  { title: "Commercial Pool Fit-Outs", desc: "End-to-end fit-outs for hotels, fitness centres, and aquatic facilities.", icon: "🏗️" },
-];
+import HeroSlider from "./components/HeroSlider";
 
 const featuredProducts = [
   { name: "VarioFlo VS-10 Commercial Pump", tag: "Equipment", blurb: "High-flow variable-speed pump built for commercial circulation loads." },
@@ -15,9 +10,9 @@ const featuredProducts = [
 export default function Home() {
   return (
     <>
-      <section className="relative overflow-hidden bg-gradient-to-br from-sky-500 via-sky-600 to-cyan-600 text-white">
-        <div className="absolute inset-0 opacity-20 [background-image:radial-gradient(circle_at_30%_20%,white,transparent_40%),radial-gradient(circle_at_70%_80%,white,transparent_40%)]" />
-        <div className="relative max-w-6xl mx-auto px-6 py-24 md:py-32">
+      <section className="relative isolate overflow-hidden text-white min-h-[calc(100vh-4rem)] flex items-center">
+        <HeroSlider />
+        <div className="relative max-w-6xl mx-auto px-6 py-24 md:py-32 w-full">
           <p className="uppercase tracking-widest text-sky-100 text-sm font-semibold mb-4">
             Commercial pool products · service · installation
           </p>
@@ -41,27 +36,6 @@ export default function Home() {
               Request a Proposal
             </Link>
           </div>
-        </div>
-      </section>
-
-      <section className="max-w-6xl mx-auto px-6 py-20">
-        <div className="flex items-end justify-between mb-10">
-          <div>
-            <p className="text-sky-600 font-semibold uppercase tracking-wider text-sm">What we do</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mt-2">Featured Services</h2>
-          </div>
-          <Link href="/services" className="text-sky-600 hover:text-sky-700 font-semibold hidden sm:inline">
-            All services →
-          </Link>
-        </div>
-        <div className="grid md:grid-cols-3 gap-6">
-          {featuredServices.map((s) => (
-            <div key={s.title} className="bg-white rounded-2xl border border-sky-100 p-7 hover:shadow-lg hover:-translate-y-1 transition">
-              <div className="text-4xl mb-4">{s.icon}</div>
-              <h3 className="text-xl font-bold text-slate-900">{s.title}</h3>
-              <p className="text-slate-600 mt-2">{s.desc}</p>
-            </div>
-          ))}
         </div>
       </section>
 

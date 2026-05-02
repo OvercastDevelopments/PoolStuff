@@ -21,16 +21,24 @@ export default function ContactPage() {
         <div className="md:col-span-1 space-y-6">
           <div>
             <h3 className="font-bold text-slate-900">Visit us</h3>
+            <address className="not-italic text-slate-600 mt-1">
+              <div className="font-medium text-slate-900">PoolStuff Limited</div>
+              <div>Unit 17, 40 Andromeda Crescent</div>
+              <div>East Tamaki, Manukau 2013</div>
+            </address>
+          </div>
+          <div>
+            <h3 className="font-bold text-slate-900">Postal address</h3>
             <p className="text-slate-600 mt-1">
-              123 Poolside Ave<br />
-              Sunnyvale, CA 94086
+              PO Box 64-354<br />
+              Botany, Manukau 2163
             </p>
           </div>
           <div>
-            <h3 className="font-bold text-slate-900">Call or email</h3>
+            <h3 className="font-bold text-slate-900">Call us</h3>
             <p className="text-slate-600 mt-1">
-              <a href="tel:5551234567" className="hover:text-sky-600">(555) 123-4567</a><br />
-              <a href="mailto:hello@poolstuff.example" className="hover:text-sky-600">hello@poolstuff.example</a>
+              Ph: <a href="tel:+6492747406" className="hover:text-sky-600">09 274-7406</a><br />
+              Mob: <a href="tel:+64275012513" className="hover:text-sky-600">027 501-2513</a>
             </p>
           </div>
           <div>

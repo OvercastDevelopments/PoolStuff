@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About — PoolStuff",
-  description: "PoolStuff is a commercial pool service and supply company serving hotels, HOAs, aquatic facilities, and municipalities since 2005.",
+  description: "PoolStuff manufactures and supplies world-class aquatic facility and performance equipment to the New Zealand commercial pool market.",
 };
 
 const values = [
@@ -13,10 +13,8 @@ const values = [
 ];
 
 const team = [
-  { name: "Jamie Rivera", role: "Founder & Lead Technician" },
-  { name: "Sam Chen", role: "Service Manager" },
-  { name: "Priya Patel", role: "Installation Foreman" },
-  { name: "Marcus Holloway", role: "Water Chemistry Specialist" },
+  { name: "Scott Brearley", role: "Director" },
+  { name: "Sharlene Brearley", role: "Director" },
 ];
 
 export default function AboutPage() {
@@ -26,20 +24,43 @@ export default function AboutPage() {
         <div className="max-w-6xl mx-auto px-6 py-20">
           <h1 className="text-4xl md:text-5xl font-extrabold">About PoolStuff</h1>
           <p className="mt-4 text-sky-50 text-lg max-w-2xl">
-            A commercial pool service and supply company. Since 2005, facility managers have trusted us to keep their pools open, compliant, and operating at peak efficiency.
+            Manufacturers and suppliers of world-class aquatic facility and performance equipment, serving the New Zealand commercial pool market.
           </p>
         </div>
       </section>
 
       <section className="max-w-4xl mx-auto px-6 py-16">
-        <h2 className="text-3xl font-bold text-slate-900 mb-4">Our Story</h2>
-        <div className="space-y-4 text-slate-700 leading-relaxed">
+        <h2 className="text-3xl font-bold text-slate-900 mb-6">Our Story</h2>
+        <div className="space-y-6 text-slate-700 leading-relaxed">
           <p>
-            PoolStuff started in 2005 with one service truck and a handful of hotel accounts. Today we serve hundreds of commercial properties — hotels, HOAs, fitness centers, aquatic centers, schools, and municipal facilities — across the region.
+            Welcome to PoolStuff — manufacturers and suppliers of world-class aquatic facility and performance equipment. We&apos;re committed to meeting every pool-related need with top-quality products, delivered to the New Zealand market at competitive prices.
           </p>
-          <p>
-            Our focus has always been commercial. That means CPO®-certified technicians, documented chemistry logs, code-compliance expertise, and equipment partnerships that get your facility back online fast when something breaks. We understand that a closed pool costs you money and credibility — so we treat every call with urgency.
-          </p>
+
+          <div>
+            <h3 className="text-xl font-bold text-sky-700 mb-2">Customer Support</h3>
+            <p>
+              We put our clients first. Outstanding service is what lets you stop worrying about your pool equipment and focus on growing your business.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-bold text-sky-700 mb-2">Experience</h3>
+            <p>
+              With more than 17 years of pool operations expertise and 20 years importing and manufacturing commercial pool equipment, we know what makes a quality pool product — and what it takes to keep one running.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="text-xl font-bold text-sky-700 mb-2">The Finest Products</h3>
+            <p>
+              We&apos;ve searched the globe for durable, high-value equipment built to thrive in the demanding conditions of a commercial pool environment. Every product we stock has earned its place.
+            </p>
+          </div>
+
+          <div className="pt-4 border-t border-sky-100">
+            <p className="text-slate-600">Kind regards,</p>
+            <p className="font-semibold text-slate-900 mt-1">Scott Brearley</p>
+          </div>
         </div>
       </section>
 
@@ -59,7 +80,7 @@ export default function AboutPage() {
 
       <section className="max-w-6xl mx-auto px-6 py-16">
         <h2 className="text-3xl font-bold text-slate-900 mb-10 text-center">Meet the Team</h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
           {team.map((m) => (
             <div key={m.name} className="text-center">
               <div className="mx-auto w-28 h-28 rounded-full bg-gradient-to-br from-sky-300 to-cyan-400 mb-4" />

@@ -25,12 +25,21 @@ export default function Footer() {
         </div>
         <div>
           <h4 className="text-white font-semibold mb-3">Contact</h4>
-          <ul className="space-y-2 text-sm text-slate-400">
-            <li>123 Poolside Ave</li>
-            <li>Sunnyvale, CA 94086</li>
-            <li>(555) 123-4567</li>
-            <li>hello@poolstuff.example</li>
-          </ul>
+          <address className="not-italic text-sm text-slate-400 space-y-2">
+            <div>
+              <div className="text-slate-200 font-medium">PoolStuff Limited</div>
+              <div>Unit 17, 40 Andromeda Crescent</div>
+              <div>East Tamaki, Manukau 2013</div>
+            </div>
+            <div>
+              <div>PO Box 64-354</div>
+              <div>Botany, Manukau 2163</div>
+            </div>
+            <div className="space-y-0.5">
+              <div>Ph: <a href="tel:+6492747406" className="hover:text-sky-400">09 274-7406</a></div>
+              <div>Mob: <a href="tel:+64275012513" className="hover:text-sky-400">027 501-2513</a></div>
+            </div>
+          </address>
         </div>
         <div>
           <h4 className="text-white font-semibold mb-3">Hours</h4>

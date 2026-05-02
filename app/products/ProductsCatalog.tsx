@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 export const PRODUCT_CATEGORIES = [
   "Accessibility Equipment",
@@ -36,8 +37,18 @@ const CATEGORIES = ["All", ...PRODUCT_CATEGORIES] as const;
 type Category = (typeof CATEGORIES)[number];
 
 export default function ProductsCatalog({ products }: Props) {
+  const searchParams = useSearchParams();
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<Category>("All");
+
+  useEffect(() => {
+    const cat = searchParams.get("category");
+    if (cat && (CATEGORIES as readonly string[]).includes(cat)) {
+      setCategory(cat as Category);
+    } else {
+      setCategory("All");
+    }
+  }, [searchParams]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
