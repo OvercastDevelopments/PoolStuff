@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import NavProducts from "./NavProducts";
+import { asset } from "../lib/asset";
 
 const desktopLinks = [
   { href: "/", label: "Home" },
@@ -25,7 +26,7 @@ export default function Nav() {
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center -my-2 translate-y-5" aria-label="PoolStuff home">
           <Image
-            src="/poolstuff_logo.png"
+            src={asset("/poolstuff_logo.png")}
             alt="PoolStuff"
             width={320}
             height={100}

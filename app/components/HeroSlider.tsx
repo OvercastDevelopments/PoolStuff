@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { asset } from "../lib/asset";
 
 const SLIDES = [
-  { src: "/hero/1.jpg", alt: "Swimmer doing butterfly stroke in a lap pool" },
-  { src: "/hero/2.jpg", alt: "Resort swimming pool with sun loungers" },
-  { src: "/hero/3.jpg", alt: "Swimmer doing freestyle in a lane pool" },
-  { src: "/hero/4.jpg", alt: "Multiple swimmers racing across pool lanes" },
-  { src: "/hero/5.jpg", alt: "Lane pool with a swimmer mid-lap" },
+  { src: asset("/hero/1.jpg"), alt: "Swimmer doing butterfly stroke in a lap pool" },
+  { src: asset("/hero/2.jpg"), alt: "Resort swimming pool with sun loungers" },
+  { src: asset("/hero/3.jpg"), alt: "Swimmer doing freestyle in a lane pool" },
+  { src: asset("/hero/4.jpg"), alt: "Multiple swimmers racing across pool lanes" },
+  { src: asset("/hero/5.jpg"), alt: "Lane pool with a swimmer mid-lap" },
 ];
 
 const INTERVAL_MS = 5500;
