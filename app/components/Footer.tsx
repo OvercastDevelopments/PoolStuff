@@ -4,7 +4,7 @@ import { asset } from "../lib/asset";
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-900 text-slate-300 mt-24">
+    <footer className="bg-slate-900 text-slate-300">
       <div className="max-w-6xl mx-auto px-6 py-14 grid md:grid-cols-4 gap-10">
         <div>
           <div className="flex items-center gap-3 font-bold text-xl text-white mb-3">

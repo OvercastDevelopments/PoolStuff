@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import BrandStrip from "../components/BrandStrip";
 
 export const metadata: Metadata = {
   title: "About — PoolStuff",
@@ -66,12 +67,13 @@ export default function AboutPage() {
 
       <section className="bg-sky-50/60 border-y border-sky-100">
         <div className="max-w-6xl mx-auto px-6 py-16">
-          <h2 className="text-3xl font-bold text-slate-900 mb-10 text-center">What We Stand For</h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {values.map((v) => (
-              <div key={v.title} className="bg-white rounded-2xl p-7 border border-sky-100">
-                <h3 className="text-xl font-bold text-sky-700">{v.title}</h3>
-                <p className="text-slate-600 mt-3">{v.desc}</p>
+          <h2 className="text-3xl font-bold text-slate-900 mb-10 text-center">Meet the Team</h2>
+          <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+            {team.map((m) => (
+              <div key={m.name} className="text-center">
+                <div className="mx-auto w-28 h-28 rounded-full bg-gradient-to-br from-sky-300 to-cyan-400 mb-4" />
+                <h3 className="font-bold text-slate-900">{m.name}</h3>
+                <p className="text-sm text-slate-500">{m.role}</p>
               </div>
             ))}
           </div>
@@ -79,26 +81,27 @@ export default function AboutPage() {
       </section>
 
       <section className="max-w-6xl mx-auto px-6 py-16">
-        <h2 className="text-3xl font-bold text-slate-900 mb-10 text-center">Meet the Team</h2>
-        <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-          {team.map((m) => (
-            <div key={m.name} className="text-center">
-              <div className="mx-auto w-28 h-28 rounded-full bg-gradient-to-br from-sky-300 to-cyan-400 mb-4" />
-              <h3 className="font-bold text-slate-900">{m.name}</h3>
-              <p className="text-sm text-slate-500">{m.role}</p>
+        <h2 className="text-3xl font-bold text-slate-900 mb-10 text-center">What We Stand For</h2>
+        <div className="grid md:grid-cols-3 gap-6">
+          {values.map((v) => (
+            <div key={v.title} className="bg-white rounded-2xl p-7 border border-sky-100">
+              <h3 className="text-xl font-bold text-sky-700">{v.title}</h3>
+              <p className="text-slate-600 mt-3">{v.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="max-w-4xl mx-auto px-6 pb-20 text-center">
+      <BrandStrip />
+
+      <section className="px-6 py-12 flex-1 flex flex-col items-center justify-center text-center">
         <h2 className="text-2xl font-bold text-slate-900">Let&apos;s talk commercial pools.</h2>
-        <p className="mt-3 text-slate-600">
+        <p className="mt-3 text-slate-600 max-w-2xl">
           Whether you&apos;re planning a new facility, reviewing service contracts, or dealing with an urgent equipment issue, we&apos;re ready to help.
         </p>
         <Link
           href="/contact"
-          className="inline-block mt-6 bg-sky-600 hover:bg-sky-700 text-white px-8 py-3 rounded-full font-semibold transition"
+          className="mt-6 bg-sky-600 hover:bg-sky-700 text-white px-8 py-3 rounded-full font-semibold transition"
         >
           Contact Us
         </Link>
