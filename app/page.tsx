@@ -24,7 +24,7 @@ export default function Home() {
     <>
       <section className="relative isolate overflow-hidden text-white min-h-[72vh] flex items-center">
         <HeroSlider />
-        <div className="relative max-w-6xl mx-auto px-6 py-16 md:py-20 w-full">
+        <div className="relative max-w-6xl mx-auto px-6 pt-32 pb-20 w-full">
           <p className="uppercase tracking-widest text-sky-100 text-sm font-semibold mb-4">
             Commercial pool products · service · installation
           </p>
