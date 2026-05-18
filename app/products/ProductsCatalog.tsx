@@ -4,20 +4,17 @@ import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 export const PRODUCT_CATEGORIES = [
-  "Accessibility Equipment",
+  "Accessibility",
   "Aquarobics",
-  "Aquatic Facility Equipment",
-  "Empex Water Park Equipment",
-  "Pool Blankets and Winders",
-  "Pool Cleaning & Maintenance",
-  "Pool Vacuums",
-  "Swim School Equipment",
-  "Wash Down Hoses",
-  "Waterpolo Equipment",
-  "Water Safety Programme Equipment",
-  "Water Toys",
-  "Water Treatment Equipment",
-  "Life Guarding & Safety Equipment",
+  "Lane Rope & Accessories",
+  "Lifeguard Equipment",
+  "Pool Cleaning",
+  "Pool Cover & Reels",
+  "Pool Deck Equipment",
+  "Starting Blocks",
+  "Swim School & Water Safety",
+  "Water Testing",
+  "Watertoys",
 ] as const;
 
 export type ProductCategory = (typeof PRODUCT_CATEGORIES)[number];
@@ -25,6 +22,7 @@ export type ProductCategory = (typeof PRODUCT_CATEGORIES)[number];
 export type Product = {
   name: string;
   category: ProductCategory;
+  subcategory?: string;
   price: string;
   blurb: string;
 };
@@ -40,6 +38,7 @@ export default function ProductsCatalog({ products }: Props) {
   const searchParams = useSearchParams();
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<Category>("All");
+  const [subcategory, setSubcategory] = useState<string | null>(null);
 
   useEffect(() => {
     const cat = searchParams.get("category");
@@ -48,6 +47,8 @@ export default function ProductsCatalog({ products }: Props) {
     } else {
       setCategory("All");
     }
+    setSubcategory(searchParams.get("subcategory"));
+    setQuery(searchParams.get("q") ?? "");
   }, [searchParams]);
 
   const filtered = useMemo(() => {
@@ -55,14 +56,16 @@ export default function ProductsCatalog({ products }: Props) {
     return products.filter((p) => {
       const matchesCategory = category === "All" || p.category === category;
       if (!matchesCategory) return false;
+      if (subcategory && p.subcategory !== subcategory) return false;
       if (!q) return true;
       return (
         p.name.toLowerCase().includes(q) ||
         p.blurb.toLowerCase().includes(q) ||
-        p.category.toLowerCase().includes(q)
+        p.category.toLowerCase().includes(q) ||
+        (p.subcategory?.toLowerCase().includes(q) ?? false)
       );
     });
-  }, [products, query, category]);
+  }, [products, query, category, subcategory]);
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-12">
@@ -130,13 +133,15 @@ export default function ProductsCatalog({ products }: Props) {
             {filtered.length} {filtered.length === 1 ? "product" : "products"}
             {query && <> matching “{query}”</>}
             {category !== "All" && <> in {category}</>}
+            {subcategory && <> · {subcategory}</>}
           </div>
-          {(query || category !== "All") && (
+          {(query || category !== "All" || subcategory) && (
             <button
               type="button"
               onClick={() => {
                 setQuery("");
                 setCategory("All");
+                setSubcategory(null);
               }}
               className="text-sm font-semibold text-sky-600 hover:text-sky-700"
             >

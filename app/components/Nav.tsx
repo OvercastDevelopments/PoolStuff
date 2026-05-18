@@ -24,14 +24,14 @@ export default function Nav() {
   return (
     <header className="sticky top-0 z-50 bg-slate-900 border-b border-slate-800">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-center -my-2 translate-y-5" aria-label="PoolStuff home">
+        <Link href="/" className="flex items-end translate-y-12" aria-label="PoolStuff home">
           <Image
             src={asset("/poolstuff_logo.png")}
             alt="PoolStuff"
-            width={320}
-            height={100}
+            width={400}
+            height={125}
             priority
-            className="h-20 md:h-24 w-auto"
+            className="h-28 md:h-40 w-auto"
           />
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-base font-medium text-slate-200">

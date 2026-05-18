@@ -59,7 +59,7 @@ export default function AboutPage() {
 
           <div className="pt-4 border-t border-sky-100">
             <p className="text-slate-600">Kind regards,</p>
-            <p className="font-semibold text-slate-900 mt-1">Scott Brearley</p>
+            <p className="font-semibold text-slate-900 mt-1">Scott &amp; Sharlene Brearley</p>
           </div>
         </div>
       </section>

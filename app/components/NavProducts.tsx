@@ -63,17 +63,32 @@ export default function NavProducts() {
           >
             All Products
           </Link>
-          {PRODUCT_CATEGORIES.map((c) => (
-            <Link
-              key={c}
-              href={`/products?category=${encodeURIComponent(c)}`}
-              onClick={() => setOpen(false)}
-              role="menuitem"
-              className="block px-5 py-2 text-sm text-slate-700 hover:bg-sky-50 hover:text-sky-700 transition"
-            >
-              {c}
-            </Link>
-          ))}
+          {PRODUCT_CATEGORIES.map((c) => {
+            const landingPages: Record<string, string> = {
+              "Lifeguard Equipment": "/products/lifeguard-equipment",
+              Aquarobics: "/products/aquarobics",
+              "Pool Cleaning": "/products/pool-cleaning",
+              Watertoys: "/products/watertoys",
+              "Lane Rope & Accessories": "/products/lane-rope-and-accessories",
+              "Pool Deck Equipment": "/products/pool-deck-equipment",
+              "Starting Blocks": "/products/starting-blocks",
+              "Water Testing": "/products/water-testing",
+              "Swim School & Water Safety": "/products/swim-school-and-water-safety",
+              Accessibility: "/products/accessibility",
+            };
+            const href = landingPages[c] ?? `/products?category=${encodeURIComponent(c)}`;
+            return (
+              <Link
+                key={c}
+                href={href}
+                onClick={() => setOpen(false)}
+                role="menuitem"
+                className="block px-5 py-2 text-sm text-slate-700 hover:bg-sky-50 hover:text-sky-700 transition"
+              >
+                {c}
+              </Link>
+            );
+          })}
         </div>
       )}
     </div>

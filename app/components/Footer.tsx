@@ -1,12 +1,22 @@
 import Link from "next/link";
+import Image from "next/image";
+import { asset } from "../lib/asset";
 
 export default function Footer() {
   return (
     <footer className="bg-slate-900 text-slate-300 mt-24">
       <div className="max-w-6xl mx-auto px-6 py-14 grid md:grid-cols-4 gap-10">
         <div>
-          <div className="flex items-center gap-2 font-bold text-xl text-white mb-3">
-            <span className="inline-block w-8 h-8 rounded-full bg-gradient-to-br from-sky-400 to-cyan-500" />
+          <div className="flex items-center gap-3 font-bold text-xl text-white mb-3">
+            <div className="bg-white rounded-md p-1.5">
+              <Image
+                src={asset("/poolstuff_logo.png")}
+                alt="PoolStuff"
+                width={120}
+                height={38}
+                className="h-9 w-auto"
+              />
+            </div>
             PoolStuff
           </div>
           <p className="text-sm text-slate-400">
