@@ -21,7 +21,7 @@ export default function AboutPage() {
   return (
     <>
       <section className="bg-gradient-to-br from-sky-600 to-cyan-600 text-white">
-        <div className="max-w-6xl mx-auto px-6 py-20">
+        <div className="max-w-6xl mx-auto px-6 pt-32 pb-20">
           <h1 className="text-4xl md:text-5xl font-extrabold">About PoolStuff</h1>
           <p className="mt-4 text-sky-50 text-lg max-w-2xl">
             Manufacturers and suppliers of world-class aquatic facility and performance equipment, serving the New Zealand commercial pool market.

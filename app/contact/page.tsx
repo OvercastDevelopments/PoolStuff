@@ -9,7 +9,7 @@ export default function ContactPage() {
   return (
     <>
       <section className="bg-gradient-to-br from-sky-600 to-cyan-600 text-white">
-        <div className="max-w-6xl mx-auto px-6 py-20">
+        <div className="max-w-6xl mx-auto px-6 pt-32 pb-20">
           <h1 className="text-4xl md:text-5xl font-extrabold">Contact Us</h1>
           <p className="mt-4 text-sky-50 text-lg max-w-2xl">
             Proposals, service contracts, equipment quotes, or emergency service — we typically respond within one business day. For urgent equipment issues, call directly.

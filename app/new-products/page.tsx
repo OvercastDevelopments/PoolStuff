@@ -63,7 +63,7 @@ export default function NewProductsPage() {
   return (
     <>
       <section className="bg-gradient-to-br from-sky-600 to-cyan-600 text-white">
-        <div className="max-w-6xl mx-auto px-6 py-20">
+        <div className="max-w-6xl mx-auto px-6 pt-32 pb-20">
           <span className="inline-block bg-white/20 border border-white/30 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4">
             Just Added
           </span>

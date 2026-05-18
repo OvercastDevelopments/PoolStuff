@@ -52,7 +52,7 @@ export default function LifeguardEquipmentPage() {
   return (
     <>
       <section className="bg-gradient-to-br from-sky-600 to-cyan-600 text-white">
-        <div className="max-w-6xl mx-auto px-6 py-20">
+        <div className="max-w-6xl mx-auto px-6 pt-32 pb-20">
           <p className="uppercase tracking-widest text-sky-100 text-sm font-semibold mb-3">
             <Link href="/products" className="hover:text-white">Products</Link>
             <span className="mx-2 opacity-60">/</span>

@@ -151,7 +151,7 @@ export default function ProductsPage() {
   return (
     <>
       <section className="bg-gradient-to-br from-sky-600 to-cyan-600 text-white">
-        <div className="max-w-6xl mx-auto px-6 py-20">
+        <div className="max-w-6xl mx-auto px-6 pt-32 pb-20">
           <h1 className="text-4xl md:text-5xl font-extrabold">Commercial Products</h1>
           <p className="mt-4 text-sky-50 text-lg max-w-2xl">
             From accessibility and safety gear to water treatment, aquatic fitness, and water park equipment — everything a commercial pool facility needs.
