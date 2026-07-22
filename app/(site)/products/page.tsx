@@ -27,6 +27,7 @@ export default async function ProductsPage() {
 
   const products: Product[] = rows.map((r) => ({
     id: r.id,
+    slug: r.slug,
     name: r.name,
     category: r.category.name,
     subcategory: r.subcategory?.name ?? null,

@@ -1,11 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 export type Product = {
   id: string;
+  slug: string;
   name: string;
   category: string;
   subcategory: string | null;
@@ -156,9 +158,10 @@ export default function ProductsCatalog({ products, categories }: Props) {
       ) : (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((p) => (
-            <article
+            <Link
               key={p.id}
-              className="bg-white rounded-2xl overflow-hidden border border-sky-100 hover:shadow-lg transition"
+              href={`/product/${p.slug}`}
+              className="group bg-white rounded-2xl overflow-hidden border border-sky-100 hover:shadow-lg transition block"
             >
               <div className="relative aspect-[4/3] bg-gradient-to-br from-sky-200 to-cyan-300">
                 {p.imageUrl && (
@@ -176,15 +179,17 @@ export default function ProductsCatalog({ products, categories }: Props) {
                   {p.category}
                 </span>
                 <div className="flex items-start justify-between gap-3 mt-1">
-                  <h3 className="text-lg font-bold text-slate-900">{p.name}</h3>
+                  <h3 className="text-lg font-bold text-slate-900 group-hover:text-sky-700 transition">
+                    {p.name}
+                  </h3>
                   <span className="text-sky-700 font-bold whitespace-nowrap">{p.price}</span>
                 </div>
                 <p className="text-slate-600 text-sm mt-2">{p.blurb}</p>
-                <button className="mt-5 w-full bg-sky-50 hover:bg-sky-100 text-sky-700 font-semibold py-2 rounded-full transition">
-                  Inquire
-                </button>
+                <span className="mt-5 inline-block text-sky-600 font-semibold text-sm">
+                  View details →
+                </span>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       )}

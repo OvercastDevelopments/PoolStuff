@@ -166,8 +166,14 @@ export default async function AdminCategoriesPage() {
                           className="w-full rounded border border-slate-300 px-2 py-1.5 text-sm"
                         />
                       </div>
-                      <div className="flex items-center gap-2">
-                        <button type="submit" className="text-sky-600 hover:text-sky-700 font-semibold text-sm">Save</button>
+                      <div>
+                        <label className="block text-xs font-semibold text-slate-500 uppercase mb-1 invisible" aria-hidden>Save</label>
+                        <button
+                          type="submit"
+                          className="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold text-sm px-4 py-1.5 rounded-full transition"
+                        >
+                          Save
+                        </button>
                       </div>
                     </form>
                     <form action={doDeleteSub} className="mt-2">

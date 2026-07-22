@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { signIn } from "../../../auth";
 import { AuthError } from "next-auth";
@@ -80,6 +81,15 @@ export default async function LoginPage({
         >
           Sign in
         </button>
+
+        <div className="text-center pt-2 border-t border-slate-100">
+          <Link
+            href="/"
+            className="text-sm text-slate-500 hover:text-sky-600 font-medium"
+          >
+            ← Back to main site
+          </Link>
+        </div>
       </form>
     </div>
   );

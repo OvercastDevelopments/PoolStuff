@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { prisma } from "../../lib/prisma";
 
 const slugify = (s: string) =>
@@ -59,6 +60,7 @@ export async function createCategory(formData: FormData) {
     },
   });
   invalidate();
+  redirect("/admin/categories?saved=create");
 }
 
 export async function updateCategory(id: string, formData: FormData) {
@@ -74,6 +76,7 @@ export async function updateCategory(id: string, formData: FormData) {
     data: { name, slug, heroTitle, heroBlurb },
   });
   invalidate();
+  redirect("/admin/categories?saved=update");
 }
 
 export async function deleteCategory(id: string) {
@@ -85,6 +88,7 @@ export async function deleteCategory(id: string) {
   }
   await prisma.category.delete({ where: { id } });
   invalidate();
+  redirect("/admin/categories?saved=delete");
 }
 
 export async function createSubcategory(categoryId: string, formData: FormData) {
@@ -108,6 +112,7 @@ export async function createSubcategory(categoryId: string, formData: FormData) 
     },
   });
   invalidate();
+  redirect("/admin/categories?saved=create");
 }
 
 export async function updateSubcategory(id: string, formData: FormData) {
@@ -124,6 +129,7 @@ export async function updateSubcategory(id: string, formData: FormData) {
     data: { name, slug, icon, blurb },
   });
   invalidate();
+  redirect("/admin/categories?saved=update");
 }
 
 export async function deleteSubcategory(id: string) {
@@ -135,4 +141,5 @@ export async function deleteSubcategory(id: string) {
   }
   await prisma.subcategory.delete({ where: { id } });
   invalidate();
+  redirect("/admin/categories?saved=delete");
 }

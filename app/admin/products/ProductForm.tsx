@@ -48,7 +48,7 @@ export default function ProductForm({ mode, categories, action, initial }: Props
   };
 
   return (
-    <form action={action} encType="multipart/form-data" className="max-w-2xl space-y-6">
+    <form action={action} className="max-w-2xl space-y-6">
       <div>
         <label htmlFor="name" className="block text-sm font-semibold text-slate-700 mb-1">
           Name

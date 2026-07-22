@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { Suspense } from "react";
 import { auth, signOut } from "../../auth";
+import SavedToast from "./SavedToast";
 
 export const metadata = { title: "PoolStuff Admin" };
 
@@ -19,7 +20,14 @@ export default async function AdminLayout({
   // Not signed in → let middleware handle the redirect for protected pages;
   // just render children so the login page still works.
   if (!session?.user) {
-    return <>{children}</>;
+    return (
+      <>
+        <Suspense fallback={null}>
+          <SavedToast />
+        </Suspense>
+        {children}
+      </>
+    );
   }
 
   // Force password change flow if flagged
@@ -65,7 +73,10 @@ export default async function AdminLayout({
         </Link>
       </aside>
 
-      <main className="flex-1 p-6 md:p-10">
+      <main className="flex-1 p-6 md:p-10 relative">
+        <Suspense fallback={null}>
+          <SavedToast />
+        </Suspense>
         {mustChange && (
           <PasswordChangeBanner />
         )}

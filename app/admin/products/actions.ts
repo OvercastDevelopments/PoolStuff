@@ -24,6 +24,8 @@ async function ensureUniqueSlug(baseName: string, existingId?: string) {
   }
 }
 
+const blobToken = process.env.BLOB_READ_WRITE_TOKEN;
+
 async function uploadImage(file: File | null | undefined): Promise<string | null> {
   if (!file || file.size === 0) return null;
   const ext = file.name.split(".").pop() ?? "jpg";
@@ -31,6 +33,7 @@ async function uploadImage(file: File | null | undefined): Promise<string | null
   const blob = await put(safe, file, {
     access: "public",
     addRandomSuffix: false,
+    ...(blobToken ? { token: blobToken } : {}),
   });
   return blob.url;
 }
@@ -38,7 +41,7 @@ async function uploadImage(file: File | null | undefined): Promise<string | null
 async function deleteImage(imageUrl: string | null | undefined) {
   if (!imageUrl) return;
   try {
-    await del(imageUrl);
+    await del(imageUrl, blobToken ? { token: blobToken } : undefined);
   } catch {
     // Ignore — blob may have been removed manually
   }
@@ -76,7 +79,7 @@ export async function createProduct(formData: FormData) {
 
   revalidatePath("/products");
   revalidatePath("/new-products");
-  redirect("/admin/products");
+  redirect("/admin/products?saved=create");
 }
 
 export async function updateProduct(id: string, formData: FormData) {
@@ -124,7 +127,7 @@ export async function updateProduct(id: string, formData: FormData) {
 
   revalidatePath("/products");
   revalidatePath("/new-products");
-  redirect("/admin/products");
+  redirect("/admin/products?saved=update");
 }
 
 export async function deleteProduct(id: string) {
@@ -135,4 +138,5 @@ export async function deleteProduct(id: string) {
   revalidatePath("/products");
   revalidatePath("/new-products");
   revalidatePath("/admin/products");
+  redirect("/admin/products?saved=delete");
 }
