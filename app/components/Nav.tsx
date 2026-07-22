@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import NavProducts from "./NavProducts";
 import { asset } from "../lib/asset";
+import { prisma } from "../lib/prisma";
 
 const desktopLinks = [
   { href: "/", label: "Home" },
@@ -20,7 +21,12 @@ const mobileLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
-export default function Nav() {
+export default async function Nav() {
+  const categories = await prisma.category.findMany({
+    orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
+    select: { name: true, slug: true },
+  });
+
   return (
     <header className="sticky top-0 z-50 bg-slate-900 border-b border-slate-800">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -36,7 +42,7 @@ export default function Nav() {
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-base font-medium text-slate-200">
           <Link href="/" className="hover:text-sky-400 transition">Home</Link>
-          <NavProducts />
+          <NavProducts categories={categories} />
           {desktopLinks.slice(1).map((l) => (
             <Link key={l.href} href={l.href} className="hover:text-sky-400 transition">
               {l.label}
