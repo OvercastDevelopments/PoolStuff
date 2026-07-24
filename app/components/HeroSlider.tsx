@@ -45,7 +45,7 @@ export default function HeroSlider() {
           />
         </div>
       ))}
-      <div className="absolute inset-0 bg-gradient-to-br from-sky-700/80 via-sky-800/70 to-cyan-900/75" />
+      <div className="absolute inset-0 bg-gradient-to-br from-sky-900/45 via-slate-900/35 to-slate-900/50" />
 
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
         {SLIDES.map((_, i) => (
