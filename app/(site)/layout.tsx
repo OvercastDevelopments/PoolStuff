@@ -1,6 +1,10 @@
 import Nav from "@/app/components/Nav";
 import Footer from "@/app/components/Footer";
 
+// Nav pulls categories from Prisma so the layout can't be statically prerendered
+// (Neon Postgres autosuspends between deploys and would fail the build).
+export const dynamic = "force-dynamic";
+
 export default function SiteLayout({
   children,
 }: {

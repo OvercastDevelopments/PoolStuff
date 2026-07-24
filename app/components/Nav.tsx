@@ -21,11 +21,21 @@ const mobileLinks = [
   { href: "/contact", label: "Contact" },
 ];
 
+async function fetchCategories() {
+  try {
+    return await prisma.category.findMany({
+      orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
+      select: { name: true, slug: true },
+    });
+  } catch {
+    // DB unreachable (e.g. Neon cold start during build) — render the nav
+    // without categories rather than failing the whole page.
+    return [];
+  }
+}
+
 export default async function Nav() {
-  const categories = await prisma.category.findMany({
-    orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
-    select: { name: true, slug: true },
-  });
+  const categories = await fetchCategories();
 
   return (
     <header className="sticky top-0 z-50 bg-slate-900 border-b border-slate-800">

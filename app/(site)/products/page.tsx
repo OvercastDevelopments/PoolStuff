@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "Commercial pool products — from accessibility equipment and water treatment to water park equipment and safety gear.",
 };
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default async function ProductsPage() {
   const [rows, categoryRows] = await Promise.all([

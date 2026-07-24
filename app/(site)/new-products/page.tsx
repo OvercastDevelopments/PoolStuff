@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "The latest commercial pool equipment, chemistry, and technology added to the PoolStuff catalog.",
 };
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default async function NewProductsPage() {
   const rows = await prisma.product.findMany({
