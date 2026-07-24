@@ -3,10 +3,10 @@ import { asset } from "../lib/asset";
 
 const brands = [
   { name: "ANTI Wave", src: "/brands/antiwave.png" },
-  { name: "Empex Water Toys", src: "/brands/empex.png" },
-  { name: "Lovibond", src: "/brands/lovibond.png" },
   { name: "Maytronics", src: "/brands/maytronics1.png" },
+  { name: "Lovibond", src: "/brands/lovibond.png" },
   { name: "Para Mobility", src: "/brands/paramobility.png" },
+  { name: "Empex Water Toys", src: "/brands/empex.png" },
   { name: "SR Smith", src: "/brands/sr-smith.png" },
 ];
 
