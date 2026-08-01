@@ -21,6 +21,11 @@ type Props = {
   categories: string[];
 };
 
+function firstSentence(text: string): string {
+  const match = text.match(/^.*?[.!?](?=\s|$)/);
+  return match ? match[0] : text;
+}
+
 export default function ProductsCatalog({ products, categories }: Props) {
   const searchParams = useSearchParams();
   const allCategories = useMemo(() => ["All", ...categories], [categories]);
@@ -184,7 +189,7 @@ export default function ProductsCatalog({ products, categories }: Props) {
                   </h3>
                   <span className="text-sky-700 font-bold whitespace-nowrap">{p.price}</span>
                 </div>
-                <p className="text-slate-600 text-sm mt-2">{p.blurb}</p>
+                <p className="text-slate-600 text-sm mt-2">{firstSentence(p.blurb)}</p>
                 <span className="mt-5 inline-block text-sky-600 font-semibold text-sm">
                   View details →
                 </span>

@@ -98,7 +98,7 @@ export default async function ProductDetailPage({
               {product.name}
             </h1>
             <div className="mt-4 text-2xl font-bold text-sky-700">{product.price}</div>
-            <p className="mt-6 text-slate-700 leading-relaxed text-lg">{product.blurb}</p>
+            <p className="mt-6 text-slate-700 leading-relaxed text-lg whitespace-pre-line">{product.blurb}</p>
 
             <div className="mt-8">
               <Link

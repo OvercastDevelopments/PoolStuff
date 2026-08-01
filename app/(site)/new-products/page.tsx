@@ -3,6 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { prisma } from "@/app/lib/prisma";
 
+function firstSentence(text: string): string {
+  const match = text.match(/^.*?[.!?](?=\s|$)/);
+  return match ? match[0] : text;
+}
+
 export const metadata: Metadata = {
   title: "New Products — PoolStuff",
   description: "The latest commercial pool equipment, chemistry, and technology added to the PoolStuff catalog.",
@@ -78,7 +83,7 @@ export default async function NewProductsPage() {
                     </h3>
                     <span className="text-sky-700 font-bold whitespace-nowrap text-sm">{p.price}</span>
                   </div>
-                  <p className="text-slate-600 text-sm mt-2">{p.blurb}</p>
+                  <p className="text-slate-600 text-sm mt-2">{firstSentence(p.blurb)}</p>
                   <span className="mt-5 inline-block text-sky-600 font-semibold text-sm">
                     View details →
                   </span>
