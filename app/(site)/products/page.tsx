@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import ProductsCatalog, { type Product } from "./ProductsCatalog";
 import { prisma } from "@/app/lib/prisma";
+import type { OrderMode } from "@/app/lib/productOrder";
 
 export const metadata: Metadata = {
   title: "Commercial Products — PoolStuff",
@@ -21,7 +22,7 @@ export default async function ProductsPage() {
     }),
     prisma.category.findMany({
       orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
-      select: { name: true },
+      select: { name: true, productOrder: true },
     }),
   ]);
 
@@ -34,9 +35,13 @@ export default async function ProductsPage() {
     price: r.price,
     blurb: r.blurb,
     imageUrl: r.imageUrl,
+    sortOrder: r.sortOrder,
   }));
 
   const categories = categoryRows.map((c) => c.name);
+  const categoryOrder: Record<string, OrderMode> = Object.fromEntries(
+    categoryRows.map((c) => [c.name, c.productOrder as OrderMode])
+  );
 
   return (
     <>
@@ -50,7 +55,7 @@ export default async function ProductsPage() {
       </section>
 
       <Suspense fallback={null}>
-        <ProductsCatalog products={products} categories={categories} />
+        <ProductsCatalog products={products} categories={categories} categoryOrder={categoryOrder} />
       </Suspense>
     </>
   );

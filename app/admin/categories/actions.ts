@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "../../lib/prisma";
+import { isOrderMode } from "../../lib/productOrder";
 
 const slugify = (s: string) =>
   s
@@ -142,4 +143,62 @@ export async function deleteSubcategory(id: string) {
   await prisma.subcategory.delete({ where: { id } });
   invalidate();
   redirect("/admin/categories?saved=delete");
+}
+
+export async function updateCategoryOrderMode(id: string, formData: FormData) {
+  const mode = String(formData.get("productOrder") ?? "");
+  if (!isOrderMode(mode)) return;
+
+  // Entering MANUAL: normalise positions to a dense 1..N run in the order the
+  // category *currently* displays. This catalog arrived with a mix of 0s and
+  // hand-set values, so normalising keeps the visible order identical while
+  // giving the Reorder screen clean positions to move around.
+  if (mode === "MANUAL") {
+    const products = await prisma.product.findMany({
+      where: { categoryId: id },
+      select: { id: true },
+      orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
+    });
+    if (products.length > 0) {
+      await prisma.$transaction(
+        products.map((p, i) =>
+          prisma.product.update({ where: { id: p.id }, data: { sortOrder: i + 1 } })
+        )
+      );
+    }
+  }
+
+  await prisma.category.update({ where: { id }, data: { productOrder: mode } });
+  invalidate();
+  redirect("/admin/categories?saved=update");
+}
+
+export async function moveProduct(productId: string, direction: "up" | "down") {
+  const product = await prisma.product.findUnique({
+    where: { id: productId },
+    select: { id: true, categoryId: true },
+  });
+  if (!product) return;
+
+  const siblings = await prisma.product.findMany({
+    where: { categoryId: product.categoryId },
+    select: { id: true, name: true, sortOrder: true },
+    orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
+  });
+
+  const index = siblings.findIndex((p) => p.id === productId);
+  const target = direction === "up" ? index - 1 : index + 1;
+  if (index === -1 || target < 0 || target >= siblings.length) return;
+
+  const reordered = [...siblings];
+  [reordered[index], reordered[target]] = [reordered[target], reordered[index]];
+
+  // Rewrite the whole run so positions stay dense and gap-free even if the
+  // stored values had duplicates or holes.
+  await prisma.$transaction(
+    reordered.map((p, i) =>
+      prisma.product.update({ where: { id: p.id }, data: { sortOrder: i + 1 } })
+    )
+  );
+  invalidate();
 }

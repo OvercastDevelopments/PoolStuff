@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { sortProducts, type OrderMode } from "@/app/lib/productOrder";
 
 export type Product = {
   id: string;
@@ -14,11 +15,13 @@ export type Product = {
   price: string;
   blurb: string;
   imageUrl: string | null;
+  sortOrder: number;
 };
 
 type Props = {
   products: Product[];
   categories: string[];
+  categoryOrder: Record<string, OrderMode>;
 };
 
 function firstSentence(text: string): string {
@@ -26,7 +29,7 @@ function firstSentence(text: string): string {
   return match ? match[0] : text;
 }
 
-export default function ProductsCatalog({ products, categories }: Props) {
+export default function ProductsCatalog({ products, categories, categoryOrder }: Props) {
   const searchParams = useSearchParams();
   const allCategories = useMemo(() => ["All", ...categories], [categories]);
 
@@ -47,7 +50,7 @@ export default function ProductsCatalog({ products, categories }: Props) {
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return products.filter((p) => {
+    const matches = products.filter((p) => {
       const matchesCategory = category === "All" || p.category === category;
       if (!matchesCategory) return false;
       if (subcategory && p.subcategory !== subcategory) return false;
@@ -59,7 +62,15 @@ export default function ProductsCatalog({ products, categories }: Props) {
         (p.subcategory?.toLowerCase().includes(q) ?? false)
       );
     });
-  }, [products, query, category, subcategory]);
+
+    // "All categories" keeps the order the server sent (sortOrder, then name).
+    // Re-sorting it here would reshuffle the ~90 products that already carry a
+    // hand-set sortOrder, which is exactly the ordering this feature must not
+    // disturb. Per-category modes apply only when one category is selected.
+    if (category === "All") return matches;
+
+    return sortProducts(matches, categoryOrder[category] ?? "MANUAL");
+  }, [products, query, category, subcategory, categoryOrder]);
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-12">
@@ -166,9 +177,16 @@ export default function ProductsCatalog({ products, categories }: Props) {
             <Link
               key={p.id}
               href={`/product/${p.slug}`}
-              className="group bg-white rounded-2xl overflow-hidden border border-sky-100 hover:shadow-lg transition block"
+              className="group bg-white rounded-2xl overflow-hidden border border-sky-100 hover:shadow-lg transition flex flex-col min-h-[420px]"
             >
-              <div className="relative aspect-[4/3] bg-gradient-to-br from-sky-200 to-cyan-300">
+              <div
+                className={
+                  "relative aspect-[4/3] " +
+                  (p.imageUrl
+                    ? "bg-slate-100"
+                    : "bg-gradient-to-br from-sky-200 to-cyan-300")
+                }
+              >
                 {p.imageUrl && (
                   <Image
                     src={p.imageUrl}
@@ -179,7 +197,7 @@ export default function ProductsCatalog({ products, categories }: Props) {
                   />
                 )}
               </div>
-              <div className="p-6">
+              <div className="p-6 flex flex-col flex-1">
                 <span className="text-xs uppercase tracking-wider font-semibold text-cyan-700">
                   {p.category}
                 </span>
@@ -189,7 +207,9 @@ export default function ProductsCatalog({ products, categories }: Props) {
                   </h3>
                   <span className="text-sky-700 font-bold whitespace-nowrap">{p.price}</span>
                 </div>
-                <p className="text-slate-600 text-sm mt-2">{firstSentence(p.blurb)}</p>
+                <div className="mt-2 flex-1">
+                  <p className="text-slate-600 text-sm line-clamp-2">{firstSentence(p.blurb)}</p>
+                </div>
                 <span className="mt-5 inline-block text-sky-600 font-semibold text-sm">
                   View details →
                 </span>

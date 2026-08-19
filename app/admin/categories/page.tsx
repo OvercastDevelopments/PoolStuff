@@ -1,10 +1,13 @@
+import Link from "next/link";
 import { prisma } from "../../lib/prisma";
+import { ORDER_MODES } from "../../lib/productOrder";
 import {
   createCategory,
   createSubcategory,
   deleteCategory,
   deleteSubcategory,
   updateCategory,
+  updateCategoryOrderMode,
   updateSubcategory,
 } from "./actions";
 
@@ -36,6 +39,10 @@ export default async function AdminCategoriesPage() {
   async function doUpdateSub(formData: FormData) {
     "use server";
     await updateSubcategory(String(formData.get("id")), formData);
+  }
+  async function doUpdateOrderMode(formData: FormData) {
+    "use server";
+    await updateCategoryOrderMode(String(formData.get("id")), formData);
   }
   async function doCreateSub(formData: FormData) {
     "use server";
@@ -114,7 +121,39 @@ export default async function AdminCategoriesPage() {
                   </span>
                 </div>
               </form>
-              <form action={doDeleteCat} className="mt-2">
+              <div className="mt-5 pt-5 border-t border-slate-200">
+                <label className="block text-xs font-semibold text-slate-500 uppercase mb-2">
+                  Product order on the site
+                </label>
+                <form action={doUpdateOrderMode} className="flex flex-wrap items-center gap-3">
+                  <input type="hidden" name="id" value={c.id} />
+                  <select
+                    name="productOrder"
+                    defaultValue={c.productOrder}
+                    className="rounded-lg border border-slate-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
+                  >
+                    {ORDER_MODES.map((m) => (
+                      <option key={m.value} value={m.value}>{m.label}</option>
+                    ))}
+                  </select>
+                  <button type="submit" className="text-sky-600 hover:text-sky-700 font-semibold text-sm">
+                    Save order
+                  </button>
+                  {c.productOrder === "MANUAL" && (
+                    <Link
+                      href={`/admin/categories/${c.slug}/order`}
+                      className="text-sm font-semibold text-slate-700 hover:text-slate-900 underline underline-offset-2"
+                    >
+                      Reorder products →
+                    </Link>
+                  )}
+                </form>
+                <p className="mt-2 text-xs text-slate-500">
+                  {ORDER_MODES.find((m) => m.value === c.productOrder)?.hint}
+                </p>
+              </div>
+
+              <form action={doDeleteCat} className="mt-4">
                 <input type="hidden" name="id" value={c.id} />
                 <button
                   type="submit"

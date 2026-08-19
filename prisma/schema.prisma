@@ -10,24 +10,31 @@ datasource db {
 }
 
 model User {
-  id                  String   @id @default(uuid())
-  username            String   @unique
-  passwordHash        String
-  mustChangePassword  Boolean  @default(true)
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
+  id                 String   @id @default(uuid())
+  username           String   @unique
+  passwordHash       String
+  mustChangePassword Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+enum ProductOrderMode {
+  ALPHABETICAL
+  NATURAL
+  MANUAL
 }
 
 model Category {
-  id            String        @id @default(uuid())
-  name          String        @unique
-  slug          String        @unique
-  description   String?       @db.Text
+  id            String           @id @default(uuid())
+  name          String           @unique
+  slug          String           @unique
+  description   String?          @db.Text
   heroTitle     String?
-  heroBlurb     String?       @db.Text
-  sortOrder     Int           @default(0)
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  heroBlurb     String?          @db.Text
+  sortOrder     Int              @default(0)
+  productOrder  ProductOrderMode @default(MANUAL)
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
   subcategories Subcategory[]
   products      Product[]
 }
