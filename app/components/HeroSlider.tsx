@@ -5,11 +5,12 @@ import Image from "next/image";
 import { asset } from "../lib/asset";
 
 const SLIDES = [
-  { src: asset("/hero/1.jpg"), alt: "Swimmer doing butterfly stroke in a lap pool" },
-  { src: asset("/hero/2.jpg"), alt: "Resort swimming pool with sun loungers" },
-  { src: asset("/hero/3.jpg"), alt: "Swimmer doing freestyle in a lane pool" },
-  { src: asset("/hero/4.jpg"), alt: "Multiple swimmers racing across pool lanes" },
-  { src: asset("/hero/5.jpg"), alt: "Lane pool with a swimmer mid-lap" },
+  { src: asset("/hero/1.jpg"), alt: "Indoor aquatic centre with lane ropes, water polo goals and diving towers" },
+  { src: asset("/hero/2.jpg"), alt: "Outdoor 50-metre competition pool with lane ropes and a water polo goal" },
+  { src: asset("/hero/3.jpg"), alt: "Swimmers racing breaststroke down a lane pool at a competition" },
+  { src: asset("/hero/4.jpg"), alt: "Water polo player shooting at goal during a match" },
+  { src: asset("/hero/5.jpg"), alt: "Outdoor competition pool lanes divided by a red lane rope" },
+  { src: asset("/hero/6.jpg"), alt: "Dolphin Wave 100 robotic pool cleaner beside a resort pool" },
 ];
 
 const INTERVAL_MS = 5500;
