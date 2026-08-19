@@ -8,8 +8,8 @@ export const ORDER_MODES: { value: OrderMode; label: string; hint: string }[] = 
   },
   {
     value: "NATURAL",
-    label: "Alphabetical, number-aware",
-    hint: 'A–Z, but numbers inside names read as numbers — "Disc 2" comes before "Disc 10".',
+    label: "Numeric order",
+    hint: 'A–Z, but numbers in names count as numbers — "Disc 2" comes before "Disc 10", not after it.',
   },
   {
     value: "MANUAL",

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { prisma } from "../../../../lib/prisma";
 import { moveProduct } from "../../actions";
+import { ORDER_MODES } from "../../../../lib/productOrder";
 
 export const dynamic = "force-dynamic";
 
@@ -53,7 +54,8 @@ export default async function ReorderProductsPage({
 
       {category.productOrder !== "MANUAL" && (
         <div className="bg-amber-50 border border-amber-200 text-amber-900 rounded-xl p-4 mb-6 text-sm">
-          This category is currently set to <strong>{category.productOrder === "NATURAL" ? "Alphabetical, number-aware" : "Alphabetical"}</strong>,
+          This category is currently set to{" "}
+          <strong>{ORDER_MODES.find((m) => m.value === category.productOrder)?.label}</strong>,
           so the order below is <strong>not</strong> being used on the site. Set it to
           Manual on the{" "}
           <Link href="/admin/categories" className="underline font-semibold">Categories screen</Link>{" "}
