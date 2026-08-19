@@ -46,6 +46,7 @@ model Subcategory {
   name       String
   slug       String
   icon       String?
+  imageUrl   String?
   blurb      String?   @db.Text
   sortOrder  Int       @default(0)
   createdAt  DateTime  @default(now())

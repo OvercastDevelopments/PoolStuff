@@ -2,8 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { del, put } from "@vercel/blob";
 import { prisma } from "../../lib/prisma";
+import { deleteImage, uploadImage as uploadToBlob } from "../../lib/blob";
 
 const slugify = (s: string) =>
   s
@@ -24,28 +24,7 @@ async function ensureUniqueSlug(baseName: string, existingId?: string) {
   }
 }
 
-const blobToken = process.env.BLOB_READ_WRITE_TOKEN;
-
-async function uploadImage(file: File | null | undefined): Promise<string | null> {
-  if (!file || file.size === 0) return null;
-  const ext = file.name.split(".").pop() ?? "jpg";
-  const safe = `products/${crypto.randomUUID()}.${ext.toLowerCase()}`;
-  const blob = await put(safe, file, {
-    access: "public",
-    addRandomSuffix: false,
-    ...(blobToken ? { token: blobToken } : {}),
-  });
-  return blob.url;
-}
-
-async function deleteImage(imageUrl: string | null | undefined) {
-  if (!imageUrl) return;
-  try {
-    await del(imageUrl, blobToken ? { token: blobToken } : undefined);
-  } catch {
-    // Ignore — blob may have been removed manually
-  }
-}
+const uploadImage = (file: File | null | undefined) => uploadToBlob(file, "products");
 
 export async function createProduct(formData: FormData) {
   const name = String(formData.get("name") ?? "").trim();
