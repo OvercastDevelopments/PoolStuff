@@ -62,7 +62,14 @@ export default async function NewProductsPage() {
                 <span className="absolute top-4 left-4 z-10 bg-cyan-500 text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow">
                   New
                 </span>
-                <div className="relative aspect-[4/3] bg-gradient-to-br from-sky-200 to-cyan-300">
+                <div
+                  className={
+                    "relative aspect-[4/3] " +
+                    (p.imageUrl
+                      ? "bg-slate-100"
+                      : "bg-gradient-to-br from-sky-200 to-cyan-300")
+                  }
+                >
                   {p.imageUrl && (
                     <Image
                       src={p.imageUrl}
@@ -83,7 +90,7 @@ export default async function NewProductsPage() {
                     </h3>
                     <span className="text-sky-700 font-bold whitespace-nowrap text-sm">{p.price}</span>
                   </div>
-                  <p className="text-slate-600 text-sm mt-2">{firstSentence(p.blurb)}</p>
+                  <p className="text-slate-600 text-sm mt-2 line-clamp-2">{firstSentence(p.blurb)}</p>
                   <span className="mt-5 inline-block text-sky-600 font-semibold text-sm">
                     View details →
                   </span>

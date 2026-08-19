@@ -168,9 +168,17 @@ export default function ProductForm({ mode, categories, action, initial }: Props
                 Remove current image
               </label>
             )}
-            <p className="text-xs text-slate-500">
-              JPG, PNG, or WebP. Uploaded to Vercel Blob storage.
-            </p>
+            <div className="text-xs text-slate-500 space-y-1">
+              <p className="font-semibold text-slate-700">
+                For best results, upload a landscape 4:3 photo.
+              </p>
+              <ul className="list-disc list-inside space-y-0.5">
+                <li>Recommended dimensions: <strong>1600 × 1200 px</strong> (minimum 1200 × 900)</li>
+                <li>Aspect ratio: <strong>4:3 landscape</strong> — other ratios will be centre-cropped to fit the card</li>
+                <li>Format: JPG or PNG (WebP also supported)</li>
+                <li>Max file size: 10 MB (keep under 500 KB where possible for fast page loads)</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

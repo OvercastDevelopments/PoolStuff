@@ -66,7 +66,14 @@ export default async function ProductDetailPage({
 
       <section className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid md:grid-cols-2 gap-10">
-          <div className="relative aspect-[4/3] bg-gradient-to-br from-sky-200 to-cyan-300 rounded-2xl overflow-hidden">
+          <div
+            className={
+              "relative aspect-[4/3] rounded-2xl overflow-hidden " +
+              (product.imageUrl
+                ? "bg-slate-100"
+                : "bg-gradient-to-br from-sky-200 to-cyan-300")
+            }
+          >
             {product.imageUrl && (
               <Image
                 src={product.imageUrl}
@@ -125,7 +132,14 @@ export default async function ProductDetailPage({
                   href={`/product/${p.slug}`}
                   className="bg-white rounded-2xl overflow-hidden border border-sky-100 hover:shadow-lg transition block"
                 >
-                  <div className="relative aspect-[4/3] bg-gradient-to-br from-sky-200 to-cyan-300">
+                  <div
+                    className={
+                      "relative aspect-[4/3] " +
+                      (p.imageUrl
+                        ? "bg-slate-100"
+                        : "bg-gradient-to-br from-sky-200 to-cyan-300")
+                    }
+                  >
                     {p.imageUrl && (
                       <Image
                         src={p.imageUrl}
