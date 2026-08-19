@@ -20,7 +20,7 @@ export default function Footer() {
             PoolStuff
           </div>
           <p className="text-sm text-slate-400">
-            Commercial pool products, installation, service, and compliance — trusted by hotels, HOAs, and aquatic facilities.
+            PoolStuff provides commercial-grade equipment, ensures code-compliant maintenance, and offers prompt equipment service — all aimed at keeping pools operational and ensuring the safety of patrons.
           </p>
         </div>
         <div>
@@ -54,9 +54,8 @@ export default function Footer() {
         <div>
           <h4 className="text-white font-semibold mb-3">Hours</h4>
           <ul className="space-y-2 text-sm text-slate-400">
-            <li>Mon–Fri: 8am – 6pm</li>
-            <li>Saturday: 9am – 4pm</li>
-            <li>Sunday: Closed</li>
+            <li>Mon–Fri: 8.30am – 5pm</li>
+            <li>Sat &amp; Sun: Closed</li>
           </ul>
         </div>
       </div>

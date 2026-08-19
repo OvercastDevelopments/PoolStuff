@@ -8,14 +8,32 @@ export const metadata: Metadata = {
 };
 
 const values = [
-  { title: "Reliability", desc: "Service contracts you can count on — your pool stays open, your inspections pass, and your patrons stay safe." },
-  { title: "Compliance", desc: "CPO®-certified staff, documented logs, and deep knowledge of state and local health codes." },
-  { title: "Responsiveness", desc: "Emergency service when equipment fails — because every hour of downtime costs you revenue and reputation." },
+  {
+    title: "Reliability",
+    lines: [
+      "Equipment you can count on — your pool stays open and your patrons stay safe.",
+    ],
+  },
+  {
+    title: "Compliance",
+    lines: [
+      "ANTI WAVE Equipment complies with all World Aquatics, LEN, NCAA and equivalent regulations.",
+      "Rescue equipment meets local and International Standards.",
+      "Photometers meet NZ, Australian, European Water Treatment Testing Standards.",
+      "Accessibility Hoists meet Australian, USA & European Standards.",
+    ],
+  },
+  {
+    title: "Responsiveness",
+    lines: [
+      "Prompt equipment service — all aimed at keeping pools operational and ensuring the safety of patrons.",
+    ],
+  },
 ];
 
 const team = [
   { name: "Scott Brearley", role: "Director" },
-  { name: "Sharlene Brearley", role: "Director" },
+  { name: "Sharlene Brearley", role: "Operations Manager" },
 ];
 
 export default function AboutPage() {
@@ -47,7 +65,7 @@ export default function AboutPage() {
           <div>
             <h3 className="text-xl font-bold text-sky-700 mb-2">Experience</h3>
             <p>
-              With more than 17 years of pool operations expertise and 20 years importing and manufacturing commercial pool equipment, we know what makes a quality pool product — and what it takes to keep one running.
+              With more than 17 years of pool operations expertise and 21 years importing and manufacturing commercial pool equipment, we know what makes a quality pool product — and what it takes to keep one running.
             </p>
           </div>
 
@@ -86,7 +104,11 @@ export default function AboutPage() {
           {values.map((v) => (
             <div key={v.title} className="bg-white rounded-2xl p-7 border border-sky-100">
               <h3 className="text-xl font-bold text-sky-700">{v.title}</h3>
-              <p className="text-slate-600 mt-3">{v.desc}</p>
+              <div className="mt-3 space-y-2">
+                {v.lines.map((line) => (
+                  <p key={line} className="text-slate-600">{line}</p>
+                ))}
+              </div>
             </div>
           ))}
         </div>

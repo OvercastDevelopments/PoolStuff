@@ -22,7 +22,7 @@ export default function Home() {
             Commercial pool expertise your facility can count on.
           </h1>
           <p className="mt-6 text-lg md:text-xl text-sky-50 max-w-2xl">
-            Hotels, HOAs, fitness centers, aquatic facilities, and municipalities trust PoolStuff for commercial-grade equipment, code-compliant maintenance, and fast equipment service — keeping pools open and patrons safe.
+            PoolStuff provides commercial-grade equipment, ensures code-compliant maintenance, and offers prompt equipment service — all aimed at keeping pools operational and ensuring the safety of patrons.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Link
