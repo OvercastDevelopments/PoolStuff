@@ -40,14 +40,14 @@ export default async function Nav() {
   return (
     <header className="sticky top-0 z-50 bg-slate-900 border-b border-slate-800">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="flex items-end translate-y-12" aria-label="PoolStuff home">
+        <Link href="/" className="flex items-end translate-y-4 md:translate-y-12" aria-label="PoolStuff home">
           <Image
             src={asset("/poolstuff_logo.png")}
             alt="PoolStuff"
             width={400}
             height={125}
             priority
-            className="h-28 md:h-40 w-auto"
+            className="h-14 md:h-40 w-auto"
           />
         </Link>
         <nav className="hidden md:flex items-center gap-8 text-base font-medium text-slate-200">
@@ -66,9 +66,13 @@ export default async function Nav() {
           Get a Quote
         </Link>
       </div>
-      <nav className="md:hidden flex justify-center gap-5 text-xs font-medium text-slate-200 pb-3 px-4 overflow-x-auto">
+      <nav className="md:hidden flex flex-wrap justify-center gap-x-1 gap-y-0.5 text-sm font-medium text-slate-200 pb-2 px-3">
         {mobileLinks.map((l) => (
-          <Link key={l.href} href={l.href} className="hover:text-sky-400 whitespace-nowrap">
+          <Link
+            key={l.href}
+            href={l.href}
+            className="hover:text-sky-400 whitespace-nowrap px-2.5 py-2"
+          >
             {l.label}
           </Link>
         ))}

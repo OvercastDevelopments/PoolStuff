@@ -40,12 +40,12 @@ export default function HeroSearch() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search products…"
-        className="flex-1 bg-transparent text-white placeholder-white/70 focus:outline-none py-2"
+        className="flex-1 min-w-0 bg-transparent text-white placeholder-white/70 focus:outline-none py-2"
         aria-label="Search products"
       />
       <button
         type="submit"
-        className="bg-sky-600 hover:bg-sky-700 text-white px-5 py-2 rounded-full font-semibold transition"
+        className="shrink-0 bg-sky-600 hover:bg-sky-700 text-white px-4 sm:px-5 py-2 rounded-full font-semibold transition"
       >
         Search
       </button>

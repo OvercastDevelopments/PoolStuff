@@ -52,7 +52,7 @@ export default function HeroSlider() {
       ))}
       <div className="absolute inset-0 bg-gradient-to-br from-sky-900/45 via-slate-900/35 to-slate-900/50" />
 
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1 z-10">
         {SLIDES.map((_, i) => (
           <button
             key={i}
@@ -60,11 +60,16 @@ export default function HeroSlider() {
             onClick={() => setIndex(i)}
             aria-label={`Go to slide ${i + 1}`}
             aria-current={i === index}
-            className={
-              "h-2 rounded-full transition-all " +
-              (i === index ? "w-8 bg-white" : "w-2 bg-white/50 hover:bg-white/80")
-            }
-          />
+            className="px-1 py-3 group"
+          >
+            {/* The dot stays small; the padding above gives it a tappable box. */}
+            <span
+              className={
+                "block h-2 rounded-full transition-all " +
+                (i === index ? "w-8 bg-white" : "w-2 bg-white/50 group-hover:bg-white/80")
+              }
+            />
+          </button>
         ))}
       </div>
     </div>

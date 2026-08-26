@@ -25,12 +25,12 @@ export default function Footer() {
         </div>
         <div>
           <h4 className="text-white font-semibold mb-3">Explore</h4>
-          <ul className="space-y-2 text-sm">
-            <li><Link href="/products" className="hover:text-sky-400">Products</Link></li>
-            <li><Link href="/new-products" className="hover:text-sky-400">New Products</Link></li>
-            <li><Link href="/services" className="hover:text-sky-400">Services</Link></li>
-            <li><Link href="/about" className="hover:text-sky-400">About</Link></li>
-            <li><Link href="/contact" className="hover:text-sky-400">Contact</Link></li>
+          <ul className="text-sm">
+            <li><Link href="/products" className="hover:text-sky-400 inline-block py-1.5">Products</Link></li>
+            <li><Link href="/new-products" className="hover:text-sky-400 inline-block py-1.5">New Products</Link></li>
+            <li><Link href="/services" className="hover:text-sky-400 inline-block py-1.5">Services</Link></li>
+            <li><Link href="/about" className="hover:text-sky-400 inline-block py-1.5">About</Link></li>
+            <li><Link href="/contact" className="hover:text-sky-400 inline-block py-1.5">Contact</Link></li>
           </ul>
         </div>
         <div>
@@ -46,8 +46,8 @@ export default function Footer() {
               <div>Botany, Manukau 2163</div>
             </div>
             <div className="space-y-0.5">
-              <div>Ph: <a href="tel:+6492747406" className="hover:text-sky-400">09 274-7406</a></div>
-              <div>Mob: <a href="tel:+64275012513" className="hover:text-sky-400">027 501-2513</a></div>
+              <div>Ph: <a href="tel:+6492747406" className="hover:text-sky-400 inline-block py-1.5">09 274-7406</a></div>
+              <div>Mob: <a href="tel:+64275012513" className="hover:text-sky-400 inline-block py-1.5">027 501-2513</a></div>
             </div>
           </address>
         </div>
