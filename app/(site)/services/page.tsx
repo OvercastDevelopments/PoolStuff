@@ -6,48 +6,88 @@ export const metadata: Metadata = {
   description: "Authorized Dolphin Pool Robot service centre, Lovibond water testing service centre, and commercial aquatics pool fit-outs.",
 };
 
-const services = [
+type Section = { heading?: string; desc?: string; bullets?: string[] };
+type Service = { title: string; wide?: boolean; sections: Section[] };
+
+const services: Service[] = [
   {
-    icon: "🤖",
     title: "Dolphin Pool Robot Service Centre",
-    desc: "Authorized service centre for Maytronics Dolphin robotic pool cleaners. Factory-trained technicians are equipped to diagnose and repair all models, including commercial-grade cleaners, utilizing authentic Dolphin parts.",
-    bullets: [
-      "Warranty and out-of-warranty repairs",
-      "Genuine Maytronics parts in stock",
-      "Motor, drive, and tracking diagnostics",
-      "Cable, brush, and filter servicing",
-      "Fast turnaround — most jobs under a week",
-      "Loan units available at no charge, freight charge only",
+    sections: [
+      {
+        desc: "Authorized service centre for Maytronics Dolphin robotic pool cleaners. Factory-trained technicians are equipped to diagnose and repair all models, including commercial-grade cleaners, utilizing authentic Dolphin parts.",
+        bullets: [
+          "Warranty and out-of-warranty repairs",
+          "Genuine Maytronics parts in stock",
+          "Motor, drive, and tracking diagnostics",
+          "Cable, brush, and filter servicing",
+          "Fast turnaround — most jobs under a week",
+          "Loan units available at no charge, freight charge only",
+        ],
+      },
     ],
   },
   {
-    icon: "💧",
     title: "Lovibond Service Centre",
-    desc: "Authorized Lovibond service centre for water testing instruments. We provide calibration, servicing, and repair for photometers utilized in commercial swimming pools and aquatic facilities.",
-    bullets: [
-      "Photometer calibration & certification",
-      "Circuit boards and top replacement",
-      "Replacement reagents and tablets",
-      "Loaner units during extended repairs",
+    sections: [
+      {
+        desc: "Authorized Lovibond service centre for water testing instruments. We provide calibration, servicing, and repair for photometers utilized in commercial swimming pools and aquatic facilities.",
+        bullets: [
+          "Photometer calibration & certification",
+          "Circuit boards and key board replacement",
+          "Replacement reagents and tablets",
+          "Loaner units during extended repairs",
+        ],
+      },
     ],
   },
   {
-    icon: "🏗️",
     title: "Commercial Aquatics Pool Fit Outs",
-    desc: "We provide complete solutions for New and Retrofit Aquatic Facilities. Comprehensive fit-outs for Commercial Aquatic Facilities, including Council Pools, Splash Pads, Water Parks, School Pools, Retirement Villages, Hotels, Fitness Centre Pools and Wellness Facilities. Our installations of all deck equipment are compliant, efficient, and designed for the future.",
-    bullets: [
-      "Accessibility Equipment",
-      "Aquarobics",
-      "Lane rope & Accessories",
-      "Lifeguard Equipment",
-      "Pool Cleaning",
-      "Pool cover & Reels",
-      "Pool deck Equipment",
-      "Starting Blocks",
-      "Swim School & Water Safety Equipment",
-      "Water Testing",
-      "Water Toys",
-      "Water Polo",
+    sections: [
+      {
+        desc: "We provide complete solutions for New and Retrofit Aquatic Facilities. Comprehensive fit-outs for Commercial Aquatic Facilities, including Council Pools, Splash Pads, Water Parks, School Pools, Retirement Villages, Hotels, Fitness Centre Pools and Wellness Facilities. Our installations of all deck equipment are compliant, efficient, and designed for the future.",
+        bullets: [
+          "Accessibility Equipment",
+          "Aquarobics",
+          "Lane rope & Accessories",
+          "Lifeguard Equipment",
+          "Pool Cleaning",
+          "Pool cover & Reels",
+          "Pool deck Equipment",
+          "Starting Blocks",
+          "Swim School & Water Safety Equipment",
+          "Water Testing",
+          "Water Toys",
+          "Water Polo",
+        ],
+      },
+    ],
+  },
+  {
+    title: "Accessibility Service Centre",
+    wide: true,
+    sections: [
+      {
+        heading: "Why service and maintain your equipment?",
+        desc: "The main reason for Service and Maintenance of equipment is that it is the most cost-effective way to maintain the value of your Assistive Technology asset.",
+      },
+      {
+        desc: "The advantages of servicing and maintaining equipment are:",
+        bullets: [
+          "The equipment is organised and maintained in a systematic rather than ad-hoc way",
+          "The standard and presentation of the equipment is maintained",
+          "Subjective decision making and emergency corrective maintenance are minimised",
+          "Maintain accreditation of facility",
+          "Ensures equipment is on good working order and is available for customers with a disability to utilise",
+          "When equipment is neglected, defects can occur which may result in extensive and avoidable damage to equipment or surrounding equipment / environment.",
+          "Neglect of service and maintenance can also give rise to other risk and safety hazards, which could result in the injury of users.",
+        ],
+      },
+      {
+        heading: "How often should I service Para Mobility products?",
+        bullets: [
+          "We recommend that a service is performed at least annually for standard usage. In commercial environments, more frequent servicing is recommended to ensure devices run at peak performance.",
+        ],
+      },
     ],
   },
 ];
@@ -67,18 +107,32 @@ export default function ServicesPage() {
       <section className="max-w-6xl mx-auto px-6 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((s) => (
-            <div key={s.title} className="bg-white rounded-2xl border border-sky-100 p-7 hover:shadow-lg transition">
-              <div className="text-4xl mb-4">{s.icon}</div>
+            <div
+              key={s.title}
+              className={
+                "bg-white rounded-2xl border border-sky-100 p-7 hover:shadow-lg transition " +
+                (s.wide ? "md:col-span-2 lg:col-span-3" : "")
+              }
+            >
               <h3 className="text-xl font-bold text-slate-900">{s.title}</h3>
-              <p className="text-slate-600 mt-2">{s.desc}</p>
-              <ul className="mt-4 space-y-1.5 text-sm text-slate-700">
-                {s.bullets.map((b) => (
-                  <li key={b} className="flex gap-2">
-                    <span className="text-sky-500">✓</span>
-                    {b}
-                  </li>
-                ))}
-              </ul>
+              {s.sections.map((sec, i) => (
+                <div key={sec.heading ?? i} className={i === 0 ? "" : "mt-5"}>
+                  {sec.heading && (
+                    <h4 className="font-semibold text-sky-700 mt-4 mb-1">{sec.heading}</h4>
+                  )}
+                  {sec.desc && <p className="text-slate-600 mt-2">{sec.desc}</p>}
+                  {sec.bullets && (
+                    <ul className="mt-4 space-y-1.5 text-sm text-slate-700">
+                      {sec.bullets.map((b) => (
+                        <li key={b} className="flex gap-2">
+                          <span className="text-sky-500 shrink-0">✓</span>
+                          <span>{b}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
             </div>
           ))}
         </div>
