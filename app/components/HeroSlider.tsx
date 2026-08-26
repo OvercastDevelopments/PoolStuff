@@ -11,6 +11,10 @@ const SLIDES = [
   { src: asset("/hero/4.jpg"), alt: "Water polo player shooting at goal during a match" },
   { src: asset("/hero/5.jpg"), alt: "Outdoor competition pool lanes divided by a red lane rope" },
   { src: asset("/hero/6.jpg"), alt: "Dolphin Wave 100 robotic pool cleaner beside a resort pool" },
+  { src: asset("/hero/7.jpg"), alt: "Indoor competition pool lined with ANTI numbered starting blocks" },
+  { src: asset("/hero/8.jpg"), alt: "Indoor splash pad with colourful interactive water play features" },
+  { src: asset("/hero/9.jpg"), alt: "Yellow Pelican pool hoist poolside at an indoor accessibility pool" },
+  { src: asset("/hero/10.jpg"), alt: "Lovibond MD150 photometer sending a test result to a phone" },
 ];
 
 const INTERVAL_MS = 5500;
