@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { prisma } from "@/app/lib/prisma";
 
@@ -65,35 +64,16 @@ export default async function CategoryLandingPage({
               <Link
                 key={s.id}
                 href={tileHref(s.name)}
-                className="group bg-white rounded-2xl border border-sky-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition flex flex-col"
+                className="group bg-white rounded-2xl border border-sky-100 p-7 hover:shadow-xl hover:-translate-y-1 transition flex flex-col"
               >
-                <div
-                  className={
-                    "relative aspect-[4/3] " +
-                    (s.imageUrl
-                      ? "bg-slate-100"
-                      : "bg-gradient-to-br from-sky-200 to-cyan-300")
-                  }
-                >
-                  {s.imageUrl && (
-                    <Image
-                      src={s.imageUrl}
-                      alt={s.name}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover"
-                    />
-                  )}
-                </div>
-                <div className="p-7 flex flex-col flex-1">
-                  <h2 className="text-xl font-bold text-slate-900 group-hover:text-sky-700 transition">
-                    {s.name}
-                  </h2>
-                  {s.blurb && <p className="text-slate-600 mt-2 flex-1">{s.blurb}</p>}
-                  <span className="mt-5 text-sky-600 font-semibold text-sm">
-                    Browse {s.name} →
-                  </span>
-                </div>
+                {s.icon && <div className="text-5xl mb-4">{s.icon}</div>}
+                <h2 className="text-xl font-bold text-slate-900 group-hover:text-sky-700 transition">
+                  {s.name}
+                </h2>
+                {s.blurb && <p className="text-slate-600 mt-2 flex-1">{s.blurb}</p>}
+                <span className="mt-5 text-sky-600 font-semibold text-sm">
+                  Browse {s.name} →
+                </span>
               </Link>
             ))}
           </div>

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { prisma } from "../../lib/prisma";
 import { ORDER_MODES } from "../../lib/productOrder";
 import {
@@ -188,26 +187,14 @@ export default async function AdminCategoriesPage() {
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">Image</label>
-                        <div className="flex items-center gap-2">
-                          <div className="relative w-10 h-10 rounded bg-slate-100 overflow-hidden shrink-0 border border-slate-200">
-                            {s.imageUrl && (
-                              <Image src={s.imageUrl} alt="" fill sizes="40px" className="object-cover" />
-                            )}
-                          </div>
-                          <input
-                            name="image"
-                            type="file"
-                            accept="image/*"
-                            className="w-full text-xs file:mr-2 file:rounded-full file:border-0 file:bg-sky-50 file:px-2 file:py-1 file:text-sky-700 file:font-semibold"
-                          />
-                        </div>
-                        {s.imageUrl && (
-                          <label className="mt-1 flex items-center gap-1.5 text-xs text-slate-600">
-                            <input type="checkbox" name="removeImage" className="rounded" />
-                            Remove image
-                          </label>
-                        )}
+                        <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">Icon</label>
+                        <input
+                          name="icon"
+                          type="text"
+                          maxLength={4}
+                          defaultValue={s.icon ?? ""}
+                          className="w-full rounded border border-slate-300 px-2 py-1.5 text-sm"
+                        />
                       </div>
                       <div>
                         <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">Blurb</label>
@@ -250,12 +237,13 @@ export default async function AdminCategoriesPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">Image</label>
+                  <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">Icon</label>
                   <input
-                    name="image"
-                    type="file"
-                    accept="image/*"
-                    className="w-full text-xs file:mr-2 file:rounded-full file:border-0 file:bg-sky-50 file:px-2 file:py-1 file:text-sky-700 file:font-semibold"
+                    name="icon"
+                    type="text"
+                    maxLength={4}
+                    placeholder="🏗️"
+                    className="w-full rounded border border-slate-300 px-2 py-1.5 text-sm"
                   />
                 </div>
                 <div>

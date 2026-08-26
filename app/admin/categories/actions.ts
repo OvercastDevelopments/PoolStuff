@@ -4,7 +4,6 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "../../lib/prisma";
 import { isOrderMode } from "../../lib/productOrder";
-import { deleteImage, uploadImage } from "../../lib/blob";
 
 const slugify = (s: string) =>
   s
@@ -95,9 +94,9 @@ export async function deleteCategory(id: string) {
 
 export async function createSubcategory(categoryId: string, formData: FormData) {
   const name = String(formData.get("name") ?? "").trim();
+  const icon = String(formData.get("icon") ?? "").trim() || null;
   const blurb = String(formData.get("blurb") ?? "").trim() || null;
   if (!name) return;
-  const imageUrl = await uploadImage(formData.get("image") as File | null, "subcategories");
   const slug = await ensureUniqueSubSlug(categoryId, name);
   const max = await prisma.subcategory.aggregate({
     _max: { sortOrder: true },
@@ -108,7 +107,7 @@ export async function createSubcategory(categoryId: string, formData: FormData) 
       categoryId,
       name,
       slug,
-      imageUrl,
+      icon,
       blurb,
       sortOrder: (max._max.sortOrder ?? 0) + 1,
     },
@@ -119,27 +118,16 @@ export async function createSubcategory(categoryId: string, formData: FormData) 
 
 export async function updateSubcategory(id: string, formData: FormData) {
   const name = String(formData.get("name") ?? "").trim();
+  const icon = String(formData.get("icon") ?? "").trim() || null;
   const blurb = String(formData.get("blurb") ?? "").trim() || null;
   if (!name) return;
   const current = await prisma.subcategory.findUnique({ where: { id } });
   if (!current) return;
   const slug =
     current.name === name ? current.slug : await ensureUniqueSubSlug(current.categoryId, name, id);
-
-  const uploaded = await uploadImage(formData.get("image") as File | null, "subcategories");
-  const removeImage = formData.get("removeImage") === "on";
-  let imageUrl = current.imageUrl;
-  if (uploaded) {
-    await deleteImage(current.imageUrl);
-    imageUrl = uploaded;
-  } else if (removeImage) {
-    await deleteImage(current.imageUrl);
-    imageUrl = null;
-  }
-
   await prisma.subcategory.update({
     where: { id },
-    data: { name, slug, imageUrl, blurb },
+    data: { name, slug, icon, blurb },
   });
   invalidate();
   redirect("/admin/categories?saved=update");
@@ -152,8 +140,6 @@ export async function deleteSubcategory(id: string) {
       `Cannot delete sub-category: ${count} product${count === 1 ? " uses" : "s use"} it. Reassign them first.`
     );
   }
-  const current = await prisma.subcategory.findUnique({ where: { id } });
-  await deleteImage(current?.imageUrl);
   await prisma.subcategory.delete({ where: { id } });
   invalidate();
   redirect("/admin/categories?saved=delete");
