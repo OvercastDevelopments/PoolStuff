@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Contact — PoolStuff",
-  description: "Contact PoolStuff for commercial proposals, service contracts, equipment quotes, and emergency service.",
+  description: "Contact PoolStuff for equipment quotes, new and retrofit commercial aquatic fit outs, equipment service and repairs, and compliance support.",
 };
 
 export default function ContactPage() {
@@ -12,7 +12,7 @@ export default function ContactPage() {
         <div className="max-w-6xl mx-auto px-6 pt-32 pb-20">
           <h1 className="text-4xl md:text-5xl font-extrabold">Contact Us</h1>
           <p className="mt-4 text-sky-50 text-lg max-w-2xl">
-            Proposals, service contracts, equipment quotes, or emergency service — we typically respond within one business day. For urgent equipment issues, call directly.
+            Equipment quotes, new and retrofit aquatic fit outs, service and repairs, or compliance support — we typically respond within one business day. For urgent equipment issues, call directly.
           </p>
         </div>
       </section>
@@ -99,13 +99,13 @@ export default function ContactPage() {
                 name="facility-type"
                 className="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-sky-500"
               >
-                <option>Hotel / Resort</option>
-                <option>HOA / Condo / Apartment</option>
-                <option>Fitness Center / Gym</option>
-                <option>Aquatic Center / YMCA</option>
-                <option>School / University</option>
-                <option>Municipal / Parks &amp; Rec</option>
-                <option>Other commercial</option>
+                <option>Aquatic Centre</option>
+                <option>Swim School</option>
+                <option>School / University Pool</option>
+                <option>Retirement Village</option>
+                <option>Fitness Centre Pool</option>
+                <option>Parks &amp; Rec</option>
+                <option>Hotel</option>
               </select>
             </div>
           </div>
@@ -116,11 +116,10 @@ export default function ContactPage() {
               name="topic"
               className="w-full rounded-lg border border-slate-300 px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-sky-500"
             >
-              <option>New commercial installation</option>
-              <option>Service contract / maintenance</option>
-              <option>Equipment service or repair</option>
-              <option>Emergency service</option>
-              <option>Product or equipment quote</option>
+              <option>Product or Equipment quote</option>
+              <option>New commercial aquatic fit out.</option>
+              <option>Retrofit commercial aquatic fit out.</option>
+              <option>Equipment Service or repair</option>
               <option>Compliance / inspection support</option>
               <option>Something else</option>
             </select>

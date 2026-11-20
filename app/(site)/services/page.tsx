@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Services — PoolStuff",
@@ -135,21 +134,6 @@ export default function ServicesPage() {
               ))}
             </div>
           ))}
-        </div>
-      </section>
-
-      <section className="bg-sky-50/60 border-y border-sky-100">
-        <div className="max-w-4xl mx-auto px-6 py-16 text-center">
-          <h2 className="text-3xl font-bold text-slate-900">Need a service contract?</h2>
-          <p className="mt-3 text-slate-600">
-            Send us the details of your facility and we&apos;ll put together a tailored commercial service proposal — typically within two business days.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-block mt-8 bg-sky-600 hover:bg-sky-700 text-white px-8 py-3 rounded-full font-semibold transition"
-          >
-            Request a Proposal
-          </Link>
         </div>
       </section>
     </>
