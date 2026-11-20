@@ -1,15 +1,43 @@
 import Link from "next/link";
+import Image from "next/image";
 import HeroSlider from "@/app/components/HeroSlider";
 import HeroSearch from "@/app/components/HeroSearch";
 import BrandStrip from "@/app/components/BrandStrip";
+import { prisma } from "@/app/lib/prisma";
 
-const featuredProducts = [
-  { name: "VarioFlo VS-10 Commercial Pump", tag: "Equipment", blurb: "High-flow variable-speed pump built for commercial circulation loads." },
-  { name: "CrystalClear C-800 Filter", tag: "Equipment", blurb: "High-capacity commercial cartridge filter for heavy bather loads." },
-  { name: "BalancePro Commercial Kit", tag: "Chemicals", blurb: "Bulk-scale water chemistry starter kit for public and semi-public pools." },
+export const dynamic = "force-dynamic";
+
+// Featured by slug rather than by copied text, so each card shows the live
+// photo, name and blurb from the catalog instead of a duplicate that goes
+// stale the moment someone edits the product in the admin.
+const FEATURED = [
+  { slug: "wave-100-heavy-duty-commercial-robot", tag: "Pool Cleaning" },
+  { slug: "floaty-starfish-bodyboard", tag: "Water Toys" },
+  { slug: "lovibond-md150-photometer", tag: "Water Testing" },
 ];
 
-export default function Home() {
+async function fetchFeatured() {
+  try {
+    const rows = await prisma.product.findMany({
+      where: { slug: { in: FEATURED.map((f) => f.slug) } },
+      select: { name: true, slug: true, blurb: true, imageUrl: true },
+    });
+    // findMany ignores the order of the `in` list, so restore the intended one.
+    // A product that has been renamed or deleted simply drops out.
+    return FEATURED.flatMap((f) => {
+      const row = rows.find((r) => r.slug === f.slug);
+      return row ? [{ ...row, tag: f.tag }] : [];
+    });
+  } catch {
+    // DB unreachable (e.g. Neon cold start) — render the page without the
+    // section rather than failing the whole home page.
+    return [];
+  }
+}
+
+export default async function Home() {
+  const featuredProducts = await fetchFeatured();
+
   return (
     <>
       <section className="relative isolate overflow-hidden text-white min-h-[72vh] flex items-center">
@@ -35,7 +63,7 @@ export default function Home() {
               href="/contact"
               className="bg-sky-800/40 hover:bg-sky-800/60 border border-white/40 text-white px-6 py-3 rounded-full font-semibold transition"
             >
-              Request a Proposal
+              Request a Quote
             </Link>
           </div>
           <HeroSearch />
@@ -57,32 +85,45 @@ export default function Home() {
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {featuredProducts.map((p) => (
-              <div key={p.name} className="bg-white rounded-2xl overflow-hidden border border-sky-100 hover:shadow-lg transition">
-                <div className="aspect-[4/3] bg-gradient-to-br from-sky-200 to-cyan-300" />
-                <div className="p-6">
-                  <span className="text-xs uppercase tracking-wider font-semibold text-cyan-700">{p.tag}</span>
-                  <h3 className="text-lg font-bold text-slate-900 mt-1">{p.name}</h3>
-                  <p className="text-slate-600 text-sm mt-2">{p.blurb}</p>
+              <Link
+                key={p.slug}
+                href={`/product/${p.slug}`}
+                className="group bg-white rounded-2xl overflow-hidden border border-sky-100 hover:shadow-lg transition flex flex-col"
+              >
+                <div
+                  className={
+                    "relative aspect-[4/3] " +
+                    (p.imageUrl
+                      ? "bg-slate-100"
+                      : "bg-gradient-to-br from-sky-200 to-cyan-300")
+                  }
+                >
+                  {p.imageUrl && (
+                    <Image
+                      src={p.imageUrl}
+                      alt={p.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover"
+                    />
+                  )}
                 </div>
-              </div>
+                <div className="p-6 flex flex-col flex-1">
+                  <span className="text-xs uppercase tracking-wider font-semibold text-cyan-700">{p.tag}</span>
+                  <h3 className="text-lg font-bold text-slate-900 mt-1 group-hover:text-sky-700 transition">
+                    {p.name}
+                  </h3>
+                  <div className="mt-2 flex-1">
+                    <p className="text-slate-600 text-sm line-clamp-2">{p.blurb}</p>
+                  </div>
+                  <span className="mt-5 inline-block text-sky-600 font-semibold text-sm">
+                    View details →
+                  </span>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
-      </section>
-
-      <section className="px-6 py-12 flex-1 flex flex-col items-center justify-center text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
-          Let&apos;s keep your facility open.
-        </h2>
-        <p className="mt-4 text-slate-600 max-w-xl">
-          Tell us about your property and we&apos;ll put together a detailed proposal — typically within two business days.
-        </p>
-        <Link
-          href="/contact"
-          className="mt-8 bg-sky-600 hover:bg-sky-700 text-white px-8 py-3 rounded-full font-semibold transition"
-        >
-          Request a Proposal
-        </Link>
       </section>
     </>
   );
