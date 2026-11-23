@@ -51,6 +51,22 @@ export default function ContactPage() {
         </div>
 
         <form className="md:col-span-2 bg-white rounded-2xl border border-sky-100 p-8 space-y-5">
+          {/* The form has no action or submit handler yet, so sending would
+              silently do nothing. Until it is wired up, the notice and the
+              disabled button below point people at the phone instead.
+              To re-enable: delete this notice, and remove `disabled` and the
+              disabled styling from the submit button. */}
+          <div
+            role="status"
+            className="bg-amber-50 border border-amber-200 text-amber-900 rounded-xl px-4 py-3 text-sm"
+          >
+            <strong className="font-semibold">This form isn&apos;t accepting messages yet.</strong>{" "}
+            Please call us on{" "}
+            <a href="tel:+6492747406" className="font-semibold underline underline-offset-2">09 274-7406</a>{" "}
+            or{" "}
+            <a href="tel:+64275012513" className="font-semibold underline underline-offset-2">027 501-2513</a>{" "}
+            and we&apos;ll help you straight away.
+          </div>
           <div className="grid sm:grid-cols-2 gap-4">
             <div>
               <label htmlFor="name" className="block text-sm font-semibold text-slate-700 mb-1">Name</label>
@@ -136,7 +152,10 @@ export default function ContactPage() {
           </div>
           <button
             type="submit"
-            className="bg-sky-600 hover:bg-sky-700 text-white px-8 py-3 rounded-full font-semibold transition"
+            disabled
+            aria-disabled="true"
+            title="This form isn't accepting messages yet — please call us instead"
+            className="bg-slate-200 text-slate-500 px-8 py-3 rounded-full font-semibold cursor-not-allowed"
           >
             Send Message
           </button>
